@@ -23,6 +23,8 @@ class engine(window.window_handler):
         self.active_text_field = None
         self.active_drag_obj = None
 
+        self.GAME = None
+
         self.language = getattr(localization, LANGUAGE)()
 
     def m_loop(self):

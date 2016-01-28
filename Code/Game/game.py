@@ -1,11 +1,18 @@
 
 import calendar
 
+import pygame
+from pygame.locals import *
+
+
 
 from ..Gui import menu 
 
+
 from .game_constants import *
 from ..constants import *
+from ..Engine import events
+
 
 ##example of a really boring game
 class game():
@@ -13,10 +20,16 @@ class game():
         self.PROGRAM = PROGRAM
         if save == None:
             self.start_game()
-    
+
+        self.char = charachter(self)
+
+        r = self.PROGRAM.surf_BGR.get_rect()
+        r.topleft = (0,0)
+        events.blit_request(r, self.PROGRAM.surf_BGR)
+
     def game_loop(self):
         self.calendar.pass_time(60)
-
+        self.char.update()
 
     def start_game(self):
         self.calendar = game_calendar(self)
@@ -27,8 +40,11 @@ class game():
         text = self.calendar.get_date()
         self.datebox = menu.label(self.top_bar.surf, 1, (0.,0.), text)
         self.top_bar.add_widgets( [self.datebox] )
+        
+        #self.pos = (0, self.top_bar.surf.get_height())
 
-        #motivation_bar = menu.bar( self.top_bar.surf, (0.4, 0.05), (0.55, 0.05), "test", self.character , )
+        #gamearea rect would work better
+
 
 
         return [self.top_bar]
@@ -36,7 +52,50 @@ class game():
     def chage_var(self,var):
         pass
 
+class charachter():
+    def __init__(self, GAME):
+        self.GAME = GAME
+        self.x = 0
+        self.y = 0
+        self.surf = pygame.Surface((8, 8))
+        self.surf.fill((19,18,1))
+        self.surf.set_colorkey((19,18,1))
+        self.rect = pygame.draw.circle(self.surf, (0,200,200), (3,3) , 2, 0) 
+    def update(self):
+        keys = pygame.key.get_pressed()
+        dx,dy = 0,0
+        if keys[K_UP]: dy-=1
+        if keys[K_DOWN]: dy+=1
+        if keys[K_LEFT]: dx-=1
+        if keys[K_RIGHT]: dx+=1
+        
+        self.erase()
+        self.x += dx
+        self.y += dy
 
+        self.blit()
+
+
+    def erase(self):
+        self.blit(surf = self.GAME.PROGRAM.surf_VOID) #erase self
+       
+    def blit(self, update = True, surf = None, area = None):
+        if surf == None:
+            surf = self.surf
+        if not area == None:
+            pos = [x + y for x, y in zip( (self.x,y), area.topleft)]
+        else:
+            pos = (self.x,self.y)
+        self.GAME.PROGRAM.surf_GAME.blit(surf, pos, area) #draw self on parent surface
+ 
+        if update:
+            if area == None:
+                area = self.surf.get_rect().copy()
+                area.topleft = (self.x,self.y)
+            else:
+                area.move_ip((self.x,self.y))
+            events.blit_request(area, self.GAME.PROGRAM.surf_GAME)   #edit later     
+    
 class game_calendar():
     def __init__(self, GAME, year = START_YEAR, month = START_MONTH, day = START_DAY, hour = START_HOUR, minute = START_MIN):
         self.GAME = GAME

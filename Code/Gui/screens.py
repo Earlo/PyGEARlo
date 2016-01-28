@@ -30,13 +30,13 @@ def SMainMenu(PROGRAM):
 
     
 def SNewGAme(PROGRAM): #setup for the game
-    PROGRAM.game = game(PROGRAM)
+    PROGRAM.GAME = game(PROGRAM)
     CharSelect(PROGRAM)
 
 def Sgame(PROGRAM):
-#    PROGRAM.game.start()
-    PROGRAM.GUI = PROGRAM.game.game_gui()
-    PROGRAM.function = PROGRAM.game.game_loop
+#    PROGRAM.GAME.start()
+    PROGRAM.GUI = PROGRAM.GAME.game_gui()
+    PROGRAM.function = PROGRAM.GAME.game_loop
 
 def CharSelect(PROGRAM):
     surf = PROGRAM.surf_GUI
