@@ -2,7 +2,7 @@ import pygame
 
 LANGUAGE = "english"
 
-SWIDTH =  1000
+SWIDTH =  800
 SHEIGTH = 600
 
 FONT = "Calibri" #I know. Will change later

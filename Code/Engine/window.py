@@ -21,8 +21,9 @@ class window_handler():
 
     def create_surfaces(self): #TODO reconsider this
         #self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.RESIZABLE)
-        self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.DOUBLEBUF|pygame.RESIZABLE)
-        
+        #self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.DOUBLEBUF|pygame.RESIZABLE)
+        self.MainWindow = pygame.display.set_mode((self.w, self.h), pygame.DOUBLEBUF)
+                
         self.surf_BGR = pygame.Surface((self.w, self.h)) #background surface
         self.surf_GUI = pygame.Surface((self.w, self.h)) #GUI surface
         self.surf_GAME = pygame.Surface((self.w, self.h)) #GAME surface
@@ -30,19 +31,20 @@ class window_handler():
         self.surf_VOID = pygame.Surface((self.w, self.h)) #VOID surface
 
         self.MainWindow.blit(self.surf_GUI,(0,0))
-        self.surf_BGR.fill((20,20,50))
+        self.surf_BGR.fill((20,20,200))
 
         self.surf_VOID.fill((255,255,255))
-        self.surf_VOID.set_alpha(0)
+        #self.surf_VOID.set_alpha(0)
 
-        #self.surf_GUI.set_colorkey((0,0,0))
-        #self.surf_GAME.set_colorkey((0,0,0))
-        #self.surf_BGR.set_colorkey((0,0,0))
+        #self.surf_GUI.set_colorkey((255,255,255))
+        #self.surf_GAME.set_colorkey((255,255,255))
+        #self.surf_BGR.set_colorkey((255,255,255))
 
         self.surfaces = {}
         self.surfaces[self.surf_GUI] = 4 #surface is a key for it's draw depht
-        self.surfaces[self.surf_GAME] = 6
+        self.surfaces[self.surf_GAME] = 2
         self.surfaces[self.surf_BGR] = 9001
+
         #self.surfaces["GUI"] = [self.surf_GUI, 0] #surface is a key for it's draw depht
 
     def refresh_GUI(self):

@@ -2,6 +2,7 @@ import os
 import sys
 
 import pygame
+from pygame.locals import *
 
 from . import window
 from . import localization
@@ -31,7 +32,7 @@ class engine(window.window_handler):
         while not self.done:
             self.mouse[0] = pygame.mouse.get_pos()
             self.mouse[1] = False
-            pygame.event.pump()#
+            #pygame.event.pump()#
             for event in pygame.event.get(): # User did something
                 if event.type == pygame.QUIT: # Closed from X
                     self.done = True # Stop the Loop
@@ -53,6 +54,8 @@ class engine(window.window_handler):
                 elif event.type == pygame.KEYDOWN:
                     if not self.active_text_field == None:
                         self.active_text_field.update(event)
+                    elif event.key == K_c:
+                       self.GAME.char.placeBeacon()
                 elif event.type == pygame.VIDEORESIZE: #or event.type == pygame.FULLSCREEN:
                    self.rezise_request(event)
                 elif event.type == update_screen_event:
