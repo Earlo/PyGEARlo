@@ -22,7 +22,7 @@ class enemy0(unit.unit):
         self.hp = 2
         self.isInside = False
                 
-        self.pattern = patterns.movePattern0(self)
+        self.pattern = patterns.movePattern3( self )
 
         self.x = -32
         self.y = 50

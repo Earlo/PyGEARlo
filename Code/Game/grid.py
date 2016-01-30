@@ -25,11 +25,6 @@ class grid():
                 #self.tiles[-1].draw(self.surf)
 
 
-
-
-
-
-
 class tile(list):
     def __init__(self,grid,pos):
         self.occupied = False

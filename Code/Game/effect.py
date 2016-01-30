@@ -59,8 +59,6 @@ class effect():
             else:
                 self.dead = True
 
-
-
 fpath = os.path.dirname(os.path.realpath(__file__))
 class explosion(effect):
     sprites = [os.path.join(fpath,"assets", "explosion1.png"),
@@ -82,4 +80,21 @@ class explosion(effect):
         else:
             self.blit()
 
+
+class energyTail(effect):
+    def __init__(self, GAME, pos, sprite):
+        self.sprites = sprite
+        super().__init__(GAME, 2, pos)
         
+
+    def update(self,x,y):
+        super().update()
+
+        self.x = x
+        self.y = y
+        #if (self.dead):
+        #    self.GAME.effects.remove(self)
+
+        self.blit()
+
+

@@ -6,7 +6,6 @@ import pygame
 
 class unit():
     def __init__(self, GAME, sprite = None):
-
         self.FLAGS = []
         self.tile = None
         self.GAME = GAME
